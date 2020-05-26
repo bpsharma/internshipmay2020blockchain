@@ -1,0 +1,11 @@
+Number <input type="text" id="num"><br>
+Result <input type="text" id="result"><br>
+<input type="button" value="Factorial" onclick="showfactorial()">
+<script src="mylogic.js"></script>
+<script>
+    function showfactorial(){
+        var n=parseInt(document.getElementById("num").value);
+        var f=factorial(n);
+        document.getElementById("result").value=f;       
+    }
+</script>

@@ -1,0 +1,13 @@
+Number <input type="text" id="num"><br>
+Result <input type="text" id="result"><br>
+<input type="button" value="Factorial" onclick="factorial()">
+
+<script>
+    function factorial(){
+        var n=parseInt(document.getElementById("num").value);
+        var f=1;
+        for(i=1;i<=n;i++)
+          f=f*i;
+        document.getElementById("result").value=f;       
+    }
+</script>
