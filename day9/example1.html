@@ -1,0 +1,44 @@
+Book Number <input type="number" id="bookno"> <input type="button" value="Search" id="search"><br>
+Title <input type="text" id="title"><br>
+Author <input type="text" id="author"><br>
+Price <input type="text" id="price"><br>
+<input type="button" value="Save Book" id="save">
+<div id="message"></div>
+
+<script src="jquery-3.5.1.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function(){
+        $("#save").click(function(){
+            var bookno=$("#bookno").val();
+            var title=$("#title").val();
+            var author=$("#author").val();
+            var price=$("#price").val();
+
+            $.post("savebook.php",{bookno:bookno,title:title,author:author,price:price},function(r,s){
+                if(r=="done"){
+                    $("#message").html("Record Saved for bookno "+bookno);
+                }
+                else{
+                    $("#message").html("Error : "+r);
+                }
+            });
+        });
+
+        $("#search").click(function(){
+            var bookno=$("#bookno").val();
+            $.post("searchbook.php",{bookno:bookno},function(r,s){
+                if(r=="error"){
+                    $("#message").html("Invalid Book No... Unable to search");
+                }
+                else{
+                    var data=r.split(",");
+                    $("#title").val(data[0]);
+                    $("#author").val(data[1]);
+                    $("#price").val(data[2]);
+                }
+            });
+        });
+
+
+    });
+</script>
