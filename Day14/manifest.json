@@ -1,0 +1,16 @@
+{
+   "short_name": "Demo",
+    "name": "DemoProject",
+    "icons": [
+      {
+        "src": "images/pwa-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      }
+    ],
+    "start_url": "index.html",
+    "background_color": "#FFEF5E",
+    "display": "standalone",
+    "scope": ".",
+    "theme_color": "#FFEF5E"
+  }
