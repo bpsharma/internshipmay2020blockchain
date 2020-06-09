@@ -1,0 +1,24 @@
+<html>
+<head>
+<link rel="manifest" href="manifest.json">
+<script src="sw.js"></script>
+<title>
+about
+</title>
+</head>
+<body>
+<h1>
+Welcome to demo site
+</h1>
+<a href="about.html">
+Abou Us</a>
+</body>
+ <script>
+        if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+        console.log('Service Worker Registered');
+    });
+
+} else console.log('Your browser does not support the Service-Worker!');
+        </script>
+</html>
