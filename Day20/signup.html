@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Singup Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="node_modules/web3/dist/web3.min.js"></script>
+  <script src="js/smartcontract.js"></script>
+  <script>
+    $(document).ready(function(){
+        $("#view").click(function(){
+            if(typeof web3!='undefined'){
+                web3=new Web3(web3.currentProvider);
+            }else{
+                web3=new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            }
+            web3.eth.defaultAccount=web3.eth.accounts[0];
+            var sc=web3.eth.contract(ABI);
+            var tc=sc.at(address);
+            var user=tc.getUserDetails();
+            alert(user[0]+","+user[1]+","+user[2]+","+user[3]);
+        });
+
+        $("#register").click(function(){
+            var name=$("#name").val();
+            var email=$("#email").val();
+            var mobile=$("#mobile").val();
+            var password=$("#password").val();
+
+            if(typeof web3!='undefined'){
+                web3=new Web3(web3.currentProvider);
+            }else{
+                web3=new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            }
+            web3.eth.defaultAccount=web3.eth.accounts[0];
+            var sc=web3.eth.contract(ABI);
+            var tc=sc.at(address);
+            tc.registerUser(name,email,mobile,password);
+            alert("User Created");
+        });
+    });      
+  </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                    <!-- Brand/logo -->
+                    <a class="navbar-brand" href="#">Logo</a>
+                    
+                    <!-- Links -->
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">About Us</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="signup.html">SignUp</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="contactus.html">Contact Us</a>
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row" style="margin-top:50px">
+            <div class="col">
+                Signup Form
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="mobile" placeholder="Enter Mobile" required>
+                    </div>
+                    <input type="button" value="Register" id="register" class="btn btn-primary">
+                    <input type="button" value="View User" id="view" class="btn btn-danger" >
+                  </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
